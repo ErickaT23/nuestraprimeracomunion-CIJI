@@ -23,6 +23,12 @@
   }
   
   *{box-sizing:border-box}
+  html,
+  body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+  }
   body{
     margin:0;
     background:transparent;
@@ -1395,6 +1401,8 @@ a{
   }
   
   .rsvp-msg.ok{
+    /* background: rgba(194, 117, 82, .12); */
+    /* border: 1px solid rgba(111, 61, 43, .16); */
     color: var(--olive-dark);
   }
   
@@ -1623,8 +1631,8 @@ a{
     color:#fff;
   }
   .rsvp-msg.ok{
-    background:rgba(194,117,82,.12);
-    border:1px solid rgba(111,61,43,.16);
+    /* background:rgba(194,117,82,.12); */
+    /* border:1px solid rgba(111,61,43,.16); */
     color:var(--olive-dark);
   }
   .dress .event-icon{
