@@ -5,6 +5,8 @@ const $$ = (s) => document.querySelector(s);
 
 const germanTranslations = {
   "#coverTag": "Unsere Erste Kommunion",
+  "#heroVerse p:first-child": "Lasst die Kinder zu mir kommen und hindert sie nicht daran; denn Menschen wie ihnen gehört das Himmelreich.",
+  "#heroVerse p:last-child": "Matthäus 19,14",
   "#btnOpenInvite": "Einladung öffnen",
   "#marriageNoteLine1Top": "Mit großer Freude laden wir euch ein",
   "#marriageNoteLine1Bottom": "zur Ersten Kommunion von",
@@ -193,7 +195,7 @@ function renderTimeline() {
 
   track.innerHTML = items.map((item) => `
     <div class="timeline-item">
-      <img src="${escapeHtml(item.icono || "")}" alt="${escapeHtml(item.alt || item.texto || "Itinerario")}" class="timeline-icon">
+      <img src="${escapeHtml(item.icono || "")}" alt="${escapeHtml(item.alt || item.texto || "Itinerario")}" class="timeline-icon" width="100" height="100" loading="lazy" decoding="async">
       <div class="timeline-node" aria-hidden="true">
         <span class="timeline-dot"></span>
       </div>
@@ -285,7 +287,7 @@ function renderInvitationContent() {
   setText("#closingCouple", pareja.nombres || heroPrimaryName || "Nuestra celebracion");
   setLink("#footerFacebook", cfg.footer?.facebookUrl);
   setLink("#footerInstagram", cfg.footer?.instagramUrl);
-  setImage("#heroMainImage", galeria.portadaPrincipal || "Images/ENVELOPE-1.png", pareja.nombres || heroPrimaryName || "Invitacion");
+   setImage("#heroMainImage", galeria.portadaPrincipal || "Images/ENVELOPE-1.webp", pareja.nombres || heroPrimaryName || "Invitacion");
   setImage("#celebrationSepImg", galeria.celebracion?.[0] || "Images/C1.png", "Galería de celebración");
   setImage("#rotatingSepImg", galeria.pareja?.[0] || "Images/F1.png", "Foto pareja");
 

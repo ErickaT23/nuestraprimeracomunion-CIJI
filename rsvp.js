@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
   (async () => {
     if (!invitado) return;
     try {
-      const ya = await apiCheck(getRemoteGuestId(invitado.id));
+      const ya = await window.RSVPDatabase?.getConfirmationByGuestId?.(getEventId(), invitado.id);
       if (ya) {
         markConfirmedUI();
       } else {
@@ -308,7 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const firebaseConfirmation = await window.RSVPDatabase?.getConfirmationByGuestId?.(getEventId(), invitado.id);
-      if (firebaseConfirmation || await apiCheck(getRemoteGuestId(invitado.id))) {
+      if (firebaseConfirmation) {
         markConfirmedUI("Esta invitación ya tiene una respuesta registrada. Muchas gracias.");
         return;
       }

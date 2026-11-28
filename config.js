@@ -30,7 +30,7 @@ const config = {
     descripcion: "Celebra con nosotros nuestro primer encuentro con Jesús. Carmen Inés & Juan Ignacio.",
     autor: "Two Design",
     keywords: "invitacion de primera comunion, primera comunion, Antigua Guatemala, celebracion religiosa",
-    ogImage: "https://nuestraprimeracomunion.thetwodesign.com/Images/ENVELOPE-2.png"
+    ogImage: "https://nuestraprimeracomunion.thetwodesign.com/Images/ENVELOPE-2.webp?v=3"
   },
   pareja: {
     nombres: "Carmen Inés & Juan Ignacio",
@@ -79,10 +79,10 @@ const config = {
   itinerario: {
     titulo: "Itinerario",
     items: [
-      { icono: "Images/ICONO-1.png", alt: "Ceremonia", hora: "11:00 AM", texto: "Ceremonia de Primera Comunión" },
+      { icono: "Images/ICONO-1.webp", alt: "Ceremonia", hora: "11:00 AM", texto: "Ceremonia de Primera Comunión" },
       { icono: "Images/ICONO-2.png", alt: "Fotografias", hora: "12:00 PM", texto: "Fotografias familiares" },
-      { icono: "Images/ICONO-3.png", alt: "Brindis", hora: "1:00 PM", texto: "Brindis de celebracion" },
-      { icono: "Images/ICONO-4.png", alt: "Almuerzo", hora: "1:30 PM", texto: "Almuerzo especial" },
+      { icono: "Images/ICONO-3.webp", alt: "Brindis", hora: "1:00 PM", texto: "Brindis de celebracion" },
+      { icono: "Images/ICONO-4.webp", alt: "Almuerzo", hora: "1:30 PM", texto: "Almuerzo especial" },
       { icono: "Images/ICONO-5.png", alt: "Convivio", hora: "3:00 PM", texto: "Convivio familiar" },
       { icono: "Images/ICONO-6.png", alt: "Cierre", hora: "5:00 PM", texto: "Cierre de la celebracion" }
     ]
@@ -128,7 +128,7 @@ const config = {
     mensaje: "Para nosotros es muy importante que confirmes tu asistencia lo antes posible, o bien nos indiques si no podras acompanarnos."
   },
   galeria: {
-    portadaPrincipal: "Images/ENVELOPE-1.png",
+    portadaPrincipal: "Images/ENVELOPE-1.webp",
     historia: ["Images/S1.png", "Images/S2.png"],
     celebracion: ["Images/C1.png", "Images/C2.png"],
     pareja: ["Images/F1.png", "Images/F2.png"]
