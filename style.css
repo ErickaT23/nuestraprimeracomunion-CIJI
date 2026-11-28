@@ -1990,6 +1990,20 @@ a{
     -webkit-text-fill-color:transparent;
     background-clip:text;
   }
+
+  /* Espaciado vertical uniforme entre las secciones principales. */
+  #hero,
+  #names,
+  #countdown,
+  #eventDetails,
+  #giftSection,
+  #wishesSection,
+  #albumDigital,
+  #rsvpSection,
+  #closing{
+    margin-block:0 !important;
+    padding-block:34px !important;
+  }
   /* Nombre pareja */
   .closing h3{
     margin: 0;
