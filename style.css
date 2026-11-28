@@ -1388,11 +1388,10 @@ a{
 .rsvp-msg{
     margin: 14px auto 0;
     max-width: 560px;
-    padding: 10px 12px;
+    padding: 60px 50px;
     border-radius: 10px;
     font-family: var(--text);
-    font-size: 14px;
-    line-height: 1.35;
+    font-size: 16px;
   }
   
   .rsvp-msg.ok{
@@ -1989,6 +1988,27 @@ a{
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     background-clip:text;
+  }
+
+  img{
+    display:block;
+    max-width:100%;
+  }
+
+  button, a, .rsvp-popup, .reception-oval, .ceremony-note, .gift-note, .wishes-note, .album-digital-note{
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .btn-outline, .envelope-trigger, .rsvp-popup-btn, .wishes-note, .gift-note, .ceremony-note, .reception-oval{
+      transition:transform .3s ease, box-shadow .3s ease, background-color .3s ease;
+    }
+    .btn-outline:hover, .envelope-trigger:hover, .rsvp-popup-btn:hover{
+      transform:translateY(-2px);
+    }
+    .wishes-note:hover, .gift-note:hover, .ceremony-note:hover, .reception-oval:hover{
+      transform:translateY(-3px);
+    }
   }
 
   /* Espaciado vertical uniforme entre las secciones principales. */

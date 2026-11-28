@@ -16,6 +16,8 @@
   <meta name="twitter:title" content="Nuestra Primera Comunión | 19.12.2026">
   <meta name="twitter:description" content="Celebra con nosotros nuestro primer encuentro con Jesús. Carmen Inés &amp; Juan Ignacio.">
   <meta name="twitter:image" content="https://nuestraprimeracomunion.thetwodesign.com/Images/ENVELOPE-2.png">
+  <link rel="preload" as="image" href="Images/ENVELOPE-2.png" fetchpriority="high">
+  <link rel="preload" as="image" href="Images/ENVELOPE-1.png" fetchpriority="high">
   <link rel="stylesheet" href="style.css">
   <!-- (Opcional) Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +34,7 @@
 
     <div class="envelope-wrap">
       <button class="envelope-trigger" id="btnOpenEnvelope" type="button" aria-label="Abrir invitación">
-        <img class="envelope" src="Images/ENVELOPE-2.png" alt="Sobre invitación">
+        <img class="envelope" src="Images/ENVELOPE-2.png" alt="Sobre invitación" width="800" height="800" decoding="async" fetchpriority="high">
       </button>
     </div>
 
@@ -68,7 +70,7 @@
     <div class="hero-overlay">
       <div class="hero-composition fade-in-element">
         <div class="hero-artwork">
-          <img id="heroMainImage" src="Images/ENVELOPE-1.png" alt="Nombre del Confirmando" class="hero-main-image">
+          <img id="heroMainImage" src="Images/ENVELOPE-1.png" alt="Carmen Inés y Juan Ignacio" class="hero-main-image" width="1200" height="1400" decoding="async" fetchpriority="high">
           <div class="hero-verse" id="heroVerse">
             <p>Dejen que los niños vengan a mí, y no se lo impidan, porque el reino de los cielos es de quienes son como ellos.</p>
             <p>Mateo 19:14</p>
@@ -89,7 +91,7 @@
             <span class="marriage-note-date" id="marriageNoteDate">19 de Diciembre, 2026</span>
           </p>
       </div>
-      <img src="Images/MEDALLITA.png" alt="" class="marriage-note-medal" aria-hidden="true">
+      <img src="Images/MEDALLITA.png" alt="" class="marriage-note-medal" width="180" height="180" loading="lazy" decoding="async" aria-hidden="true">
     </div>
   </section>
 
@@ -123,7 +125,7 @@
     <div class="countdown-events">
       <article class="ceremony-note">
         <div class="ceremony-note-inner">
-          <img src="Images/ICONO-1.png" alt="Ceremonia" class="event-note-icon">
+          <img src="Images/ICONO-1.png" alt="Ceremonia" class="event-note-icon" width="100" height="100" loading="lazy" decoding="async">
           <h4 id="ceremonyTitle">Ceremonia</h4>
           <p class="event-note-place" id="ceremonyPlace">San Francisco el Grande</p>
           <p class="event-note-location" id="ceremonyLocation">7a Calle Oriente y Calle de los Pasos, La Antigua Guatemala</p>
@@ -134,7 +136,7 @@
 
       <article class="reception-oval-wrap">
         <div class="reception-oval">
-          <img src="Images/ICONO-3.png" alt="Recepción" class="event-note-icon">
+          <img src="Images/ICONO-3.png" alt="Recepción" class="event-note-icon" width="100" height="100" loading="lazy" decoding="async">
           <h4 id="receptionTitle">Celebracion</h4>
           <p class="event-note-place" id="receptionPlace">Conceptio</p>
           <p class="event-note-location" id="receptionLocation">Antigua Guatemala</p>
@@ -202,10 +204,10 @@
 
 <section class="album-digital fade-in-element" id="albumDigital">
   <div class="album-digital-note">
-    <img src="Images/ICONO-4.png" alt="Álbum Digital" class="album-digital-icon">
+    <img src="Images/ICONO-4.png" alt="Álbum Digital" class="album-digital-icon" width="100" height="100" loading="lazy" decoding="async">
     <h3>Álbum Digital</h3>
     <p>Escanea el código QR o utiliza el botón para subir las fotos de nuestra Primera Comunión y convertirlas en recuerdos inolvidables.</p>
-    <img class="album-digital-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&amp;color=4b5326&amp;data=https%3A%2F%2Fphotos.app.goo.gl%2FnmnVi1b8uM7TLhQo6" alt="Código QR para subir fotos">
+    <img class="album-digital-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&amp;color=4b5326&amp;data=https%3A%2F%2Fphotos.app.goo.gl%2FnmnVi1b8uM7TLhQo6" alt="Código QR para subir fotos" width="220" height="220" loading="lazy" decoding="async">
     <a class="btn-outline" href="https://photos.app.goo.gl/nmnVi1b8uM7TLhQo6" target="_blank" rel="noopener">Subir fotos</a>
   </div>
 </section>
@@ -275,7 +277,7 @@
 </a>
 </div>
     <div class="footer-logo">
-      <img id="footer-logo" alt="Logo de la empresa" src="Images/logo.png">
+      <img id="footer-logo" alt="Logo de la empresa" src="Images/logo.png" width="180" height="60" loading="lazy" decoding="async">
     </div>
   </footer>
 

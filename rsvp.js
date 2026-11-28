@@ -26,14 +26,13 @@ function hideMsg(el) {
 }
 
 function sendRSVPToWhatsApp(invitado, nombre, respuesta, pases) {
+  const respuestaTexto = respuesta === "SI" ? "Sí asistiré" : "No podremos asistir";
   const message = [
-    "Confirmación de asistencia",
-    "Primera Comunión",
-    `ID de invitado: ${invitado.id}`,
-    `Nombre: ${nombre}`,
-    `Lugares reservados: ${invitado.pases}`,
-    `Respuesta: ${respuesta === "SI" ? "Sí asistiré" : "No podré asistir"}`,
-    `Lugares: ${pases}`,
+    `Hola, queremos confirmar nuestra asistencia a la Primera Comunión de Carmen Inés y Juan Ignacio.`,
+    "",
+    nombre,
+    `Lugares confirmados: ${pases}`,
+    `Respuesta: ${respuestaTexto}`,
   ].join("\n");
   const url = `https://wa.me/50240069313?text=${encodeURIComponent(message)}`;
   window.open(url, "_blank", "noopener,noreferrer");
@@ -306,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ? Math.max(1, Number(popupCount.value || invitado.pases || 1))
       : 0;
 
-    btnSubmit.disabled = true;
+    if (btnSubmit) btnSubmit.disabled = true;
 
     try {
       const res = await apiSend({
@@ -327,11 +326,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       console.warn("Respuesta del endpoint:", res);
-      btnSubmit.disabled = false;
+      if (btnSubmit) btnSubmit.disabled = false;
       showMsg(msg, "No se pudo guardar tu respuesta. Intenta de nuevo.", "error");
     } catch (error) {
       console.error("apiSend:", error);
-      btnSubmit.disabled = false;
+      if (btnSubmit) btnSubmit.disabled = false;
       showMsg(msg, "Error de conexión al enviar tu respuesta.", "error");
     }
   });
