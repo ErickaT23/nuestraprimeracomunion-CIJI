@@ -167,7 +167,7 @@ function renderInvitationContent() {
   document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", seo.descripcion || "");
   document.querySelector('meta[name="twitter:image"]')?.setAttribute("content", seo.ogImage || galeria.portadaPrincipal || "");
 
-  setText("#coverTag", pareja.portadaEtiqueta || "Mi Confirmacion");
+  setText("#coverTag", pareja.portadaEtiqueta || "Mi Primera Comunión");
   setHtml("#coverCouple", `${escapeHtml(heroPrimaryName)} <span class="amp">&</span><br>${escapeHtml(heroSecondaryName)}`);
   setHeroVerse("#heroVerse", cfg.textos?.versiculo || "Dejen que los niños vengan a mí, y no se lo impidan, porque el reino de los cielos es de quienes son como ellos. - Mateo 19:14");
   setText("#heroBrideName", heroPrimaryName);

@@ -26,11 +26,11 @@ const config = {
     legacyKeyParam: "admin"
   },
   seo: {
-    titulo: "Primera Comunión | 19.12.2026",
-    descripcion: "Te invitamos a celebrar una Primera Comunión el 19 de diciembre de 2026 en Antigua Guatemala.",
+    titulo: "Nuestra Primera Comunión | 19.12.2026",
+    descripcion: "Celebra con nosotros nuestro primer encuentro con Jesús. Carmen Inés & Juan Ignacio.",
     autor: "Two Design",
-    keywords: "invitacion de confirmacion, confirmacion catolica, Antigua Guatemala, celebracion religiosa",
-    ogImage: "https://i.ibb.co/FFLwB4G/MTERRACOTA.png"
+    keywords: "invitacion de primera comunion, primera comunion, Antigua Guatemala, celebracion religiosa",
+    ogImage: "https://nuestraprimeracomunion.thetwodesign.com/Images/ENVELOPE-2.png"
   },
   pareja: {
     nombres: "Carmen Inés & Juan Ignacio",
@@ -79,7 +79,7 @@ const config = {
   itinerario: {
     titulo: "Itinerario",
     items: [
-      { icono: "Images/ICONO-1.png", alt: "Ceremonia", hora: "11:00 AM", texto: "Ceremonia de Confirmacion" },
+      { icono: "Images/ICONO-1.png", alt: "Ceremonia", hora: "11:00 AM", texto: "Ceremonia de Primera Comunión" },
       { icono: "Images/ICONO-2.png", alt: "Fotografias", hora: "12:00 PM", texto: "Fotografias familiares" },
       { icono: "Images/ICONO-3.png", alt: "Brindis", hora: "1:00 PM", texto: "Brindis de celebracion" },
       { icono: "Images/ICONO-4.png", alt: "Almuerzo", hora: "1:30 PM", texto: "Almuerzo especial" },
@@ -134,7 +134,7 @@ const config = {
     pareja: ["Images/F1.png", "Images/F2.png"]
   },
   footer: {
-    hashtag: "#MiConfirmacion",
+    hashtag: "#MiPrimeraComunion",
     instagramUrl: "https://www.instagram.com/thetwodesign",
     facebookUrl: "https://www.facebook.com/thetwodesign",
     marcaTexto: "Diseño",
