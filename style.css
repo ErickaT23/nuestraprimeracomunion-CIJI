@@ -320,6 +320,27 @@ a{
     pointer-events:none;
     transition:background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease, box-shadow .2s ease, opacity .2s ease;
   }
+  .language-bubble{
+    position:fixed;
+    right:18px;
+    bottom:78px;
+    z-index:90;
+    width:46px;
+    height:46px;
+    border:1px solid rgba(255,255,255,.65);
+    border-radius:50%;
+    background:#8f795e;
+    color:#fff;
+    font:600 12px "Lora", serif;
+    letter-spacing:.06em;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(75,83,38,.22);
+  }
+  .language-bubble:hover,
+  .language-bubble:focus-visible{
+    transform:translateY(-2px);
+    outline:none;
+  }
   body.invitation-open .music-bubble{
     opacity:1;
     transform:none;

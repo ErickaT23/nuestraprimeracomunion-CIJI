@@ -3,6 +3,79 @@
 // Usamos "$$" para evitar conflicto.
 const $$ = (s) => document.querySelector(s);
 
+const germanTranslations = {
+  "#coverTag": "Unsere Erste Kommunion",
+  "#btnOpenInvite": "Einladung öffnen",
+  "#marriageNoteLine1Top": "Mit großer Freude laden wir euch ein",
+  "#marriageNoteLine1Bottom": "zur Ersten Kommunion von",
+  "#marriageNoteLine3Top": "Wir freuen uns sehr, diesen besonderen Tag",
+  "#marriageNoteLine3Bottom": "mit euch zu feiern",
+  "#countdown h3": "Bald ist es so weit!",
+  "#cdDays + .countdown-simple-label": "Tage",
+  "#cdHours + .countdown-simple-label": "Stunden",
+  "#cdMins + .countdown-simple-label": "Minuten",
+  "#cdSecs + .countdown-simple-label": "Sekunden",
+  "#calendarBtn": "Zum Kalender hinzufügen",
+  "#ceremonyTitle": "Gottesdienst",
+  "#receptionTitle": "Feier",
+  "#ceremonyMapLink": "Route anzeigen",
+  "#receptionMapLink": "Route anzeigen",
+  "#giftTitle": "Geschenke",
+  "#giftText": "Eure Anwesenheit an diesem besonderen Tag ist unser schönstes Geschenk. Wenn ihr uns zusätzlich eine Freude machen möchtet, freuen wir uns sehr darüber.",
+  "#wishesTitle": "Liebe Wünsche",
+  "#wishesIntro": "Hinterlasst uns eine liebe Nachricht für diesen besonderen Tag.",
+  "#btnToggleWishForm": "Nachricht senden",
+  "#btnToggleWishes": "Nachrichten lesen",
+  "#albumDigital h3": "Digitales Album",
+  "#albumDigital p": "Scannt den QR-Code oder nutzt den Button, um Fotos von unserer Ersten Kommunion hochzuladen und diese schönen Erinnerungen festzuhalten.",
+  "#albumDigital a": "Fotos hochladen",
+  "#rsvpTitle": "Zusage",
+  "#rsvpCopy": "Es ist uns sehr wichtig, dass ihr uns so bald wie möglich mitteilt, ob ihr dabei sein könnt.",
+  ".rsvp-reserved-label": "Wir haben Plätze für euch reserviert",
+  ".rsvp-radio-option span": "Teilnahme bestätigen",
+  "#closingSubtitle": "Danke, dass ihr unsere erste Begegnung mit Jesus begleitet.",
+  ".rsvp-popup-title": "Teilnahme bestätigen",
+  ".rsvp-popup-subtitle": "Reservierte Plätze",
+  "#rsvp-popup-yes": "Ja, sehr gerne",
+  "#rsvp-popup-no": "Nein, leider kann ich nicht kommen",
+  ".guest-sub": "Wir haben reserviert",
+  "#guestCardSeatsTxt": "Plätze",
+  "#guestCardSeatsHonor": "für euch",
+};
+
+const spanishTranslations = new Map();
+
+function setLanguage(isGerman) {
+  Object.entries(germanTranslations).forEach(([selector, german]) => {
+    document.querySelectorAll(selector).forEach((element) => {
+      if (!spanishTranslations.has(element)) spanishTranslations.set(element, element.textContent);
+      element.textContent = isGerman ? german : spanishTranslations.get(element);
+    });
+  });
+  document.querySelectorAll("#rsvp-popup-count option").forEach((option) => {
+    const count = option.value;
+    option.textContent = `${count} ${isGerman ? (count === "1" ? "Platz" : "Plätze") : (count === "1" ? "lugar" : "lugares")}`;
+  });
+  document.documentElement.lang = isGerman ? "de" : "es";
+  const button = $$("#btnLanguage");
+  if (button) {
+    button.textContent = isGerman ? "ES" : "DE";
+    button.setAttribute("aria-label", isGerman ? "Auf Spanisch zurückwechseln" : "Auf Deutsch übersetzen");
+    button.setAttribute("aria-pressed", String(isGerman));
+  }
+  document.body.classList.toggle("language-german", isGerman);
+}
+
+function initLanguageToggle() {
+  const button = $$("#btnLanguage");
+  if (!button) return;
+  let isGerman = false;
+  button.addEventListener("click", () => {
+    isGerman = !isGerman;
+    setLanguage(isGerman);
+  });
+}
+
 function getInvitationConfig() {
   return window.config || {};
 }
@@ -267,6 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 4) Música
   initMusic();
+  initLanguageToggle();
 
   // 5) Contador
   const countdownDate = getEventDateParts();

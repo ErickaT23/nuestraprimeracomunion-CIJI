@@ -60,9 +60,11 @@ function applyGuestData(guest) {
   if (popupName) popupName.value = name;
   const popupCount = document.getElementById("rsvp-popup-count");
   if (popupCount) {
+    const german = document.body.classList.contains("language-german");
     popupCount.innerHTML = Array.from({ length: passes }, (_, index) => {
       const count = index + 1;
-      return `<option value="${count}">${count} ${count === 1 ? "lugar" : "lugares"}</option>`;
+      const label = german ? (count === 1 ? "Platz" : "Plätze") : (count === 1 ? "lugar" : "lugares");
+      return `<option value="${count}">${count} ${label}</option>`;
     }).join("");
   }
 }

@@ -155,6 +155,9 @@ function resetConfirmUI() {
   if (form) form.classList.remove("is-confirmed");
   if (note) note.style.display = "";
   if (copy) copy.style.display = "";
+  radioYes?.removeAttribute("checked");
+  radioYes && (radioYes.checked = false);
+  $("#rsvp-response-no") && ($( "#rsvp-response-no").checked = false);
   document.querySelectorAll('#rsvp-form input, #rsvp-form select, #rsvp-form button').forEach((el) => {
     if (!el.hasAttribute("readonly")) el.disabled = false;
   });
@@ -208,9 +211,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function openPopup() {
     if (form.classList.contains("is-confirmed")) return;
     const maxPasses = Math.max(1, Number(invitado?.pases || 1));
+    const german = document.body.classList.contains("language-german");
     popupCount.innerHTML = Array.from({ length: maxPasses }, (_, index) => {
       const count = index + 1;
-      return `<option value="${count}">${count} ${count === 1 ? "lugar" : "lugares"}</option>`;
+      const label = german ? (count === 1 ? "Platz" : "Plätze") : (count === 1 ? "lugar" : "lugares");
+      return `<option value="${count}">${count} ${label}</option>`;
     }).join("");
     popupName.value = invitado?.nombre || "";
     popupResponse = null;
@@ -273,6 +278,23 @@ document.addEventListener("DOMContentLoaded", () => {
       resetConfirmUI();
     }
   })();
+
+  async function syncFirebaseConfirmation() {
+    if (!invitado || !window.RSVPDatabase?.getConfirmationByGuestId) return;
+    try {
+      const confirmation = await window.RSVPDatabase.getConfirmationByGuestId(getEventId(), invitado.id);
+      if (confirmation) {
+        markConfirmedUI();
+      } else if (form.classList.contains("is-confirmed")) {
+        popupResponse = null;
+        resetConfirmUI();
+      }
+    } catch (error) {
+      console.warn("No se pudo sincronizar el estado RSVP:", error);
+    }
+  }
+
+  setInterval(syncFirebaseConfirmation, 3000);
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
