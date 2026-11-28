@@ -202,54 +202,42 @@
 
 <section class="album-digital fade-in-element" id="albumDigital">
   <div class="album-digital-note">
+    <img src="Images/ICONO-4.png" alt="Álbum Digital" class="album-digital-icon">
     <h3>Álbum Digital</h3>
     <p>Escanea el código QR o utiliza el botón para subir las fotos de nuestra Primera Comunión y convertirlas en recuerdos inolvidables.</p>
-    <img class="album-digital-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&amp;data=https%3A%2F%2Fphotos.app.goo.gl%2FnmnVi1b8uM7TLhQo6" alt="Código QR para subir fotos">
+    <img class="album-digital-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&amp;color=4b5326&amp;data=https%3A%2F%2Fphotos.app.goo.gl%2FnmnVi1b8uM7TLhQo6" alt="Código QR para subir fotos">
     <a class="btn-outline" href="https://photos.app.goo.gl/nmnVi1b8uM7TLhQo6" target="_blank" rel="noopener">Subir fotos</a>
   </div>
 </section>
 
-<section class="adults-only fade-in-element" id="adultsOnlySection">
-  <h3 id="adultsOnlyTitle">Solo adultos</h3>
-  <p class="adults-only-text" id="adultsOnlyText">Amamos a sus pequeños; sin embargo, por las características del lugar y pensando en su seguridad, hemos decidido celebrar este momento únicamente entre adultos.</p>
-</section>
-
 <section class="rsvp fade-in-element" id="rsvpSection">
+  <h3 class="rsvp-editorial-title" id="rsvpTitle">Confirmar asistencia</h3>
+  <p class="rsvp-strong rsvp-editorial-copy" id="rsvpCopy">
+    Para nosotros es muy importante que confirmes tu asistencia lo antes posible,
+    o bien nos indiques si no podras acompanarnos.
+  </p>
   <div class="rsvp-editorial-art">
-    <h3 class="rsvp-editorial-title" id="rsvpTitle">Confirmar asistencia</h3>
-    <p class="rsvp-strong rsvp-editorial-copy" id="rsvpCopy">
-      Para nosotros es muy importante que confirmes tu asistencia lo antes posible,
-      o bien nos indiques si no podras acompanarnos.
-    </p>
-    <img src="Images/E4.png" alt="Confirmar asistencia" class="rsvp-editorial-image">
-    <img src="Images/CALA1.png" alt="Cala decorativa" class="rsvp-editorial-flower">
-
     <div class="rsvp-editorial-note">
       <form id="rsvp-form" class="rsvp-form" novalidate>
         <div class="form-group">
           <input type="text" id="rsvp-name" name="name" value="Nombre del invitado" readonly>
         </div>
 
+        <div class="form-group" id="guest-count-wrapper" style="display:grid">
+          <p class="rsvp-reserved-label">Hemos reservado para ustedes</p>
+          <p class="rsvp-reserved-count" id="reservedSeats">1 lugar</p>
+        </div>
+
         <div class="form-group">
-          <p class="rsvp-label">Asistirás</p>
           <div class="rsvp-response-group">
             <label class="rsvp-radio-option" for="rsvp-response-yes">
-              <input type="radio" id="rsvp-response-yes" name="attendance" value="SI">
-              <span>Sí, con mucho gusto</span>
-            </label>
-            <label class="rsvp-radio-option" for="rsvp-response-no">
-              <input type="radio" id="rsvp-response-no" name="attendance" value="NO">
-              <span>No, lamentablemente no podré</span>
-            </label>
-          </div>
+               <input type="radio" id="rsvp-response-yes" name="attendance" value="SI">
+               <span>Confirmar Asistencia</span>
+             </label>
+             <input type="radio" id="rsvp-response-no" name="attendance" value="NO" hidden>
+           </div>
         </div>
 
-        <div class="form-group" id="guest-count-wrapper" style="display:none">
-          <label for="guest-count">Cantidad de pases</label>
-          <select id="guest-count" name="guests" disabled></select>
-        </div>
-
-        <button type="submit" id="btnConfirmarRsvp">Confirmar asistencia</button>
       </form>
 
       <div id="msgRsvp" class="rsvp-msg" style="display:none"></div>
@@ -257,11 +245,23 @@
   </div>
 </section>
 
+<div class="rsvp-popup-backdrop" id="rsvpPopupBackdrop" hidden>
+  <div class="rsvp-popup" role="dialog" aria-modal="true" aria-live="polite" aria-labelledby="rsvpPopupTitle">
+    <h4 class="rsvp-popup-title" id="rsvpPopupTitle">Confirmar Asistencia</h4>
+    <input id="rsvp-popup-name" class="rsvp-popup-name" type="text" maxlength="80" autocomplete="name" readonly>
+    <p class="rsvp-popup-subtitle">Lugares reservados</p>
+    <select id="rsvp-popup-count" class="rsvp-popup-select"></select>
+    <div class="rsvp-popup-actions">
+      <button type="button" id="rsvp-popup-yes" class="rsvp-popup-btn">Sí, con mucho gusto</button>
+      <button type="button" id="rsvp-popup-no" class="rsvp-popup-btn secondary">No, lamentablemente no podré</button>
+    </div>
+  </div>
+</div>
+
   <!-- FOTO CAMBIANTE -->
   <!-- CIERRE -->
   <section class="closing fade-in-element" id="closing">
-    <p class="closing-subtitle" id="closingSubtitle">Con gratitud</p>
-    <h3 id="closingCouple">Nombre del Confirmando</h3>
+    <p class="closing-subtitle" id="closingSubtitle">Gracias por acompañarnos en nuestro primer encuentro con Jesús.</p>
   </section>
 
   <!-- FOOTER -->

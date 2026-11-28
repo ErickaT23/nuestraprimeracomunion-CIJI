@@ -1,16 +1,16 @@
 // ===================== LOADS.JS =====================
 // 1) Lista de invitados (ejemplo)
 const guests = [
-  { id: "1", name: "Familia Castillo", passes: 4 },
-  { id: "2", name: "Sofía Ramírez", passes: 2 },
-  { id: "3", name: "Daniel Morales", passes: 1 },
-  { id: "4", name: "Valeria Soto", passes: 2 },
-  { id: "5", name: "Familia Herrera", passes: 5 },
+  { id: "1", name: "Familia 1", passes: 4 },
+  { id: "2", name: "Invitado 2", passes: 2 },
+  { id: "3", name: "Invitado 3", passes: 1 },
+  { id: "4", name: "Invitado 4", passes: 2 },
+  { id: "5", name: "Invitado 5", passes: 5 },
 ];
 
 window.LocalGuestSeeds = {
   ...(window.LocalGuestSeeds || {}),
-  gabyjose2026: guests.reduce((acc, guest) => {
+  "primera-comunion-2026": guests.reduce((acc, guest) => {
     acc[String(guest.id)] = {
       id: String(guest.id),
       nombre: guest.name,
@@ -22,7 +22,7 @@ window.LocalGuestSeeds = {
 };
 
 window.seedEventGuestsToFirebase = async function seedEventGuestsToFirebase(explicitEventId) {
-  const eventId = explicitEventId || window.config?.event?.defaultEventId || "gabyjose2026";
+  const eventId = explicitEventId || window.config?.event?.defaultEventId || "primera-comunion-2026";
   const rsvpDB = window.RSVPDatabase;
 
   if (!rsvpDB?.migrateLocalGuestsToFirebase) {

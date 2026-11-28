@@ -111,7 +111,6 @@ function markConfirmedUI(message) {
   const form = $("#rsvp-form");
   const btn = $("#btnConfirmarRsvp");
   const msg = $("#msgRsvp");
-
   if (form) form.classList.add("is-confirmed");
   document.querySelectorAll('#rsvp-form input, #rsvp-form select, #rsvp-form button').forEach((el) => {
     if (!el.hasAttribute("readonly")) el.disabled = true;
@@ -153,13 +152,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = $("#rsvp-form");
   const inputNombre = $("#rsvp-name");
   const guestCountWrapper = $("#guest-count-wrapper");
-  const guestCount = $("#guest-count");
+  const reservedSeats = $("#reservedSeats");
   const btnSubmit = $("#btnConfirmarRsvp");
   const radioYes = $("#rsvp-response-yes");
-  const radioNo = $("#rsvp-response-no");
   const msg = $("#msgRsvp");
+  const popupBackdrop = $("#rsvpPopupBackdrop");
+  const popupName = $("#rsvp-popup-name");
+  const popupCount = $("#rsvp-popup-count");
+  let popupResponse = null;
 
-  if (!form || !inputNombre || !guestCountWrapper || !guestCount || !btnSubmit || !radioYes || !radioNo || !msg) return;
+  if (!form || !inputNombre || !guestCountWrapper || !radioYes || !msg) return;
 
   let invitado = getGuestFromURL();
 
@@ -168,27 +170,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!invitado) {
       inputNombre.value = "Nombre del invitado";
-      guestCount.innerHTML = '<option value="1">1 pase</option>';
-      guestCount.disabled = true;
+      if (reservedSeats) reservedSeats.textContent = "1 lugar";
       return;
     }
 
     inputNombre.value = invitado.nombre;
 
     const maxPasses = Math.max(1, Number(invitado.pases || 1));
-    guestCount.innerHTML = "";
-    for (let count = maxPasses; count >= 1; count -= 1) {
-      const option = document.createElement("option");
-      option.value = String(count);
-      option.textContent = `${count} ${count === 1 ? "pase" : "pases"}`;
-      guestCount.appendChild(option);
-    }
+    if (reservedSeats) reservedSeats.textContent = `${maxPasses} ${maxPasses === 1 ? "lugar" : "lugares"}`;
   }
 
   function toggleGuestCount() {
-    const show = radioYes.checked;
-    guestCountWrapper.style.display = show ? "grid" : "none";
-    guestCount.disabled = !show;
+    guestCountWrapper.style.display = "grid";
+  }
+
+  function openPopup() {
+    const maxPasses = Math.max(1, Number(invitado?.pases || 1));
+    popupCount.innerHTML = Array.from({ length: maxPasses }, (_, index) => {
+      const count = index + 1;
+      return `<option value="${count}">${count} ${count === 1 ? "lugar" : "lugares"}</option>`;
+    }).join("");
+    popupName.value = invitado?.nombre || "";
+    popupResponse = null;
+    popupBackdrop.hidden = false;
+    popupName.focus();
+  }
+
+  function closePopup() {
+    popupBackdrop.hidden = true;
   }
 
   paintGuestData();
@@ -197,7 +206,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("guest:updated", paintGuestData);
   radioYes.addEventListener("change", toggleGuestCount);
-  radioNo.addEventListener("change", toggleGuestCount);
+  const confirmOption = document.querySelector('.rsvp-radio-option[for="rsvp-response-yes"]');
+  confirmOption?.addEventListener("click", (event) => {
+    event.preventDefault();
+    openPopup();
+  });
+  $("#rsvp-popup-yes")?.addEventListener("click", () => {
+    if (!popupName.value.trim()) {
+      popupName.focus();
+      return;
+    }
+    popupResponse = "SI";
+    radioYes.checked = true;
+    inputNombre.value = popupName.value.trim();
+    closePopup();
+    form.requestSubmit();
+  });
+  $("#rsvp-popup-no")?.addEventListener("click", () => {
+    if (!popupName.value.trim()) {
+      popupName.focus();
+      return;
+    }
+    popupResponse = "NO";
+    $("#rsvp-response-no").checked = true;
+    inputNombre.value = popupName.value.trim();
+    closePopup();
+    form.requestSubmit();
+  });
+  popupBackdrop?.addEventListener("click", (event) => {
+    if (event.target === popupBackdrop) closePopup();
+  });
 
   (async () => {
     if (!invitado) return;
@@ -224,14 +262,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (!radioYes.checked && !radioNo.checked) {
+    const selectedResponse = popupResponse || (radioYes.checked ? "SI" : $("#rsvp-response-no")?.checked ? "NO" : null);
+    if (!selectedResponse) {
       showMsg(msg, "Selecciona si asistirás o no para continuar.", "error");
       return;
     }
 
-    const respuesta = radioYes.checked ? "SI" : "NO";
+    const respuesta = selectedResponse;
     const pasesSeleccionados = respuesta === "SI"
-      ? Math.max(1, Number(guestCount.value || invitado.pases || 1))
+      ? Math.max(1, Number(popupCount.value || invitado.pases || 1))
       : 0;
 
     btnSubmit.disabled = true;
@@ -239,7 +278,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const res = await apiSend({
         guestId: getRemoteGuestId(invitado.id),
-        nombre: invitado.nombre,
+        nombre: inputNombre.value.trim() || invitado.nombre,
         pases: String(pasesSeleccionados),
         respuesta,
       });

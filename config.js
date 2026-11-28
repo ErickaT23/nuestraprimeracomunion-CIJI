@@ -10,7 +10,7 @@ const firebaseConfig = {
 
 const config = {
   event: {
-    defaultEventId: "confirmacion-catolica-2026",
+    defaultEventId: "primera-comunion-2026",
     databaseURL: firebaseConfig.databaseURL,
     eventIdParam: "eventId",
     dateISO: "2026-12-19T08:30:00-06:00",
@@ -42,7 +42,7 @@ const config = {
     fecha: "19-12-2026",
     fechaVisible: "19.12.2026",
     fechaDestacada: "19 . 12 . 2026",
-    cierreSubtitulo: "Con gratitud"
+    cierreSubtitulo: "Gracias por acompañarnos en nuestro primer encuentro con Jesús."
   },
   ceremonia: {
     mensajeLinea1Superior: "Con mucha alegría, les invitamos a acompañarnos",

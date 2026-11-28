@@ -8,12 +8,12 @@
     --sand: #e2d3c5;
     --line: rgba(42,60,37,.16);
     --card: rgba(244,238,231,.84);
-    --rose-gold-text: linear-gradient(120deg, #8f6a41 0%, #a97b4e 24%, #cfb08a 50%, #a97b4e 76%, #7a5a36 100%);
-    --gold-text: linear-gradient(135deg, #5f4313 0%, #8d6821 16%, #c59a2f 34%, #f1d06a 50%, #c79b33 66%, #8a651f 84%, #5b3f10 100%);
+    --rose-gold-text: var(--couple-coffee-gold);
+    --gold-text: var(--couple-coffee-gold);
     --olive-text: linear-gradient(135deg, #4b5326 0%, #68733a 22%, #8a9253 48%, #a3aa66 62%, #6d7640 80%, #4b5326 100%);
     --olive-accent: linear-gradient(120deg, #55602f 0%, #748146 24%, #95a266 50%, #748146 76%, #55602f 100%);
     --black-gloss-text: #81341e;
-    --gradient-accent: linear-gradient(135deg, #5f4313 0%, #8d6821 16%, #c59a2f 34%, #f1d06a 50%, #c79b33 66%, #8a651f 84%, #5b3f10 100%);
+    --gradient-accent: var(--couple-coffee-gold);
     --couple-coffee-gold: linear-gradient(to right, #8f795e, #b39a72, #d0b98a, #b39a72, #8f795e);
 
     --title: "Cinzel", serif;
@@ -377,7 +377,7 @@ a{
   .marriage-note{
     position:relative;
     isolation:isolate;
-    width:min(100%, 420px);
+     width:min(100%, 480px);
     margin:-160px auto 0;
     padding:0;
   }
@@ -418,7 +418,7 @@ a{
   }
   .marriage-note-copy{
     color:var(--olive-dark);
-    font-size:clamp(12px, 2vw, 15px);
+     font-size:14px;
     line-height:1.65;
     text-shadow:0 0 7px rgba(163,170,102,.42);
   }
@@ -433,7 +433,7 @@ a{
      margin:14px 0;
      padding:5px;
      font-family:"Lora", serif;
-     font-size:22px;
+     font-size:30px;
      font-style:italic;
      line-height:1.05;
      background:var(--couple-coffee-gold);
@@ -500,7 +500,7 @@ a{
      align-self:center;
      margin:0 0 10px;
      padding:5px;
-     font-size:23px;
+     font-size:30px;
      font-family:"Lora", serif;
      font-weight:400;
      font-style:italic;
@@ -571,7 +571,7 @@ a{
      width:min(100%, 235px);
      background:url("Images/NOTE-V1.png") center/100% 100% no-repeat;
      padding:28px 18px;
-     box-shadow:0 10px 20px rgba(28,39,66,.08);
+     box-shadow:none;
      display:flex;
      flex-direction:column;
      align-items:center;
@@ -698,7 +698,7 @@ a{
      aspect-ratio:1122 / 1402;
      background:url("Images/NOTE-V1.png") center/100% 100% no-repeat;
      padding:28px 18px;
-     box-shadow:0 10px 20px rgba(28,39,66,.08);
+     box-shadow:none;
      display:flex;
      flex-direction:column;
      justify-content:center;
@@ -876,13 +876,16 @@ a{
      padding:30px 18px;
      text-align:center;
    }
-   .wishes-note{
-     width:min(100%, 420px);
-     margin:0 auto;
-     padding:34px 24px;
-     background:url("Images/NOTE-V1.png") center/100% 100% no-repeat;
-     text-align:center;
-   }
+.wishes-note{
+  width:min(100%, 420px);
+  margin:0 auto;
+  padding:34px 24px;
+  background:url("Images/NOTE-V1.png") center/100% 100% no-repeat;
+  text-align:center;
+  min-height:260px;
+  height:auto;
+  overflow:visible;
+}
   .gift-editorial{
      position:relative;
      z-index:1;
@@ -908,7 +911,7 @@ a{
      margin:0 0 4px;
      font-family:"Lora", serif;
      font-size:30px;
-     font-style:normal;
+     font-style:italic;
      font-weight:400;
      line-height:1;
      background:var(--rose-gold-text);
@@ -1012,7 +1015,7 @@ a{
   /* ====== CONTADOR HORIZONTAL ====== */
   .count-title{
     font-family: var(--cursive);
-    font-size:28px;
+     font-size:24px;
     margin-bottom:22px;
     color:#3b2d2d;
   }
@@ -1401,6 +1404,33 @@ a{
     border: 1px solid rgba(200, 0, 0, .18);
     color: rgba(130, 0, 0, .95);
   }
+
+  .rsvp-popup-backdrop[hidden]{display:none}
+  .rsvp-popup-backdrop{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    display:grid;
+    place-items:center;
+    padding:20px;
+    background:rgba(75,83,38,.42);
+  }
+  .rsvp-popup{
+    width:min(100%, 420px);
+    padding:28px 22px 24px;
+    border-radius:20px;
+    background:#fff;
+    border:1px solid rgba(95,111,61,.25);
+    box-shadow:0 20px 60px rgba(75,83,38,.25);
+    text-align:center;
+  }
+  .rsvp-popup-title{margin:0 0 18px;background:var(--gold-text);-webkit-background-clip:text;background-clip:text;color:transparent;font-family:"Lora", serif !important;font-size:26px;font-weight:400}
+  .rsvp-popup-name,.rsvp-popup-select{width:100%;padding:12px 14px;border:1px solid rgba(95,111,61,.3);border-radius:12px;background:#fff;color:var(--olive-dark);font:16px var(--text)}
+  .rsvp-popup-name{background:var(--gold-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-family:"Lora", serif !important;font-size:22px;text-align:center}
+  .rsvp-popup-subtitle{margin:16px 0 7px;color:var(--olive-dark);font-family:var(--text);font-size:14px}
+  .rsvp-popup-actions{display:grid;gap:10px;margin-top:20px}
+  .rsvp-popup-btn{padding:12px;border:1px solid #8f795e;border-radius:12px;background:#8f795e;color:#fff;cursor:pointer;font:15px var(--text)}
+  .rsvp-popup-btn.secondary{background:transparent;color:var(--olive-dark)}
   /* Confirmado UI */
   .rsvp-confirmed{
     background: linear-gradient(135deg, rgba(204,145,115,.22) 0%, rgba(232,199,183,.9) 100%) !important;
@@ -1413,13 +1443,16 @@ a{
     padding:34px 18px 44px;
   }
   .rsvp-editorial-art{
-    position:relative;
-    width:min(100%, 560px);
-    margin:0 auto;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding-bottom:0;
+     position:relative;
+     width:100%;
+     max-width:none;
+     aspect-ratio:1798 / 2100;
+     margin:0 auto;
+     display:flex;
+     flex-direction:column;
+     align-items:center;
+     padding:42px 24px 36px;
+     background:url("Images/ENVELOPE-1.png") center/100% 100% no-repeat;
   }
   .rsvp-editorial-title{
     margin:0 0 12px;
@@ -1457,14 +1490,11 @@ a{
     z-index:2;
   }
   .rsvp-editorial-note{
-    position:absolute;
-    left:50%;
-    top:44%;
-    transform:translateX(-50%);
-    width:min(100%, 340px);
-    background:transparent;
-    padding:22px 18px 20px;
-    z-index:1;
+     position:relative;
+     width:min(100%, 340px);
+     background:transparent;
+     padding:22px 18px 20px;
+     z-index:1;
   }
   .rsvp-form{
     max-width:100%;
@@ -1474,7 +1504,6 @@ a{
   }
   .form-group{
     display:grid;
-    gap:6px;
   }
   .rsvp-form label,
   .rsvp-label{
@@ -1647,7 +1676,7 @@ a{
       height:54px;
     }
     .marriage-note{
-      width:min(100%, 300px);
+      width:min(100%, 360px);
     }
     .marriage-note-medal{
       right:-30px;
@@ -1669,7 +1698,7 @@ a{
     }
     .countdown h3{
       margin-bottom:4px;
-      font-size:27px;
+       font-size:30px;
       line-height:1;
     }
     .countdown-simple{
@@ -1713,7 +1742,7 @@ a{
     }
     .ceremony-note-inner h4,
     .reception-oval h4{
-      font-size:24px;
+      font-size:30px;
       font-style:italic;
       padding:5px;
     }
@@ -1836,13 +1865,13 @@ a{
     }
     .gift-note h3{
       margin:0 0 4px;
-      font-size:24px;
-      font-style:italic;
+      font-size:30px;
+      font-style:normal;
       padding:5px;
       line-height:1;
     }
     .gift-editorial .gift-note h3{
-      font-size:24px;
+      font-size:30px;
       font-style:italic;
       padding:5px;
     }
@@ -1864,9 +1893,9 @@ a{
       width:30%;
     }
     .rsvp-editorial-note{
-      width:min(100%, 255px);
-      top:42%;
-      padding:18px 14px 16px;
+       width:min(100%, 255px);
+       top:15%;
+       padding:18px 14px 16px;
     }
     .rsvp-response-group{
       grid-template-columns:1fr;
@@ -1953,9 +1982,9 @@ a{
     position: relative;
   }
   .closing-subtitle{
-    margin:0 0 8px;
-    font-family:var(--cursive);
-    font-size:28px;
+     margin:0 0 8px;
+     font-family:"Lora", serif;
+    font-size:24px;
     background:var(--rose-gold-text);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
@@ -2360,7 +2389,7 @@ section.is-visible .btn-outline:nth-of-type(2) {
 .wishes-note #wishesTitle{
   margin:0 0 4px;
   font-family:"Lora", serif;
-  font-size:24px;
+  font-size:30px;
   font-style:italic;
   font-weight:400;
   line-height:1;
@@ -2372,7 +2401,7 @@ section.is-visible .btn-outline:nth-of-type(2) {
 .wishes-note #wishesIntro{
   margin:0;
   font-family:"Cormorant Garamond", serif;
-  font-size:15px;
+  font-size:20px;
   font-style:normal;
   line-height:1.2;
   color:#4b5326;
@@ -2384,19 +2413,92 @@ section.is-visible .btn-outline:nth-of-type(2) {
 .album-digital-note{
   width:min(100%, 420px);
   margin:0 auto;
-  padding:34px 24px;
+  padding:40px 30px;
   background:url("Images/NOTE-V1.png") center/100% 100% no-repeat;
 }
 .album-digital-note h3{
   margin:0 0 4px;
+  padding:5px;
   font-family:"Lora", serif;
   font-size:30px;
+  font-style:italic;
   font-weight:400;
   line-height:1;
   background:var(--rose-gold-text);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   background-clip:text;
+}
+.album-digital-icon{
+  display:block;
+  width:85px;
+  height:auto;
+  margin:0 auto 10px;
+}
+.rsvp-editorial-title{
+  font-family:"Lora", serif;
+  font-size:30px;
+  font-style:italic;
+  font-weight:400;
+  background:var(--couple-coffee-gold);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+#rsvpTitle{
+  font-family:"Lora", serif;
+  font-size:30px;
+}
+.event-note-icon,
+.album-digital-icon,
+.timeline-icon{
+  width:120px;
+}
+.rsvp-editorial-copy{
+  font-family:"Cormorant Garamond", serif;
+  font-size:20px;
+  font-style:normal;
+  line-height:1.2;
+  color:#4b5326;
+}
+#rsvp-name{
+  font-family:"Lora", serif !important;
+  font-size:20px !important;
+  font-style:normal;
+  background:var(--couple-coffee-gold) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  background-clip:text !important;
+}
+.rsvp-reserved-label,
+.rsvp-reserved-count{
+  padding:0 !important;
+  margin:0;
+}
+.rsvp-reserved-label{
+  color:#4b5326;
+  font-family:"Cormorant Garamond", serif;
+  font-size:16px;
+}
+.rsvp-reserved-count{
+  font-family:var(--title);
+  font-size:20px;
+  background:var(--couple-coffee-gold);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.rsvp .rsvp-radio-option span{
+  background:url("Images/textura-2.png") center/cover no-repeat;
+  border-color:#4b5326;
+  color:#4b5326;
+  box-shadow:0 8px 18px rgba(75,83,38,.12);
+}
+.rsvp .rsvp-radio-option:hover span,
+.rsvp .rsvp-radio-option input:checked + span{
+  background:url("Images/textura-2.png") center/cover no-repeat;
+  border-color:#5f6f3d;
+  color:#5f6f3d;
 }
 .album-digital-note p{
   margin:0;
