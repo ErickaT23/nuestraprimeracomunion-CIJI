@@ -1424,10 +1424,10 @@ a{
     box-shadow:0 20px 60px rgba(75,83,38,.25);
     text-align:center;
   }
-  .rsvp-popup-title{margin:0 0 18px;background:var(--gold-text);-webkit-background-clip:text;background-clip:text;color:transparent;font-family:"Lora", serif !important;font-size:26px;font-weight:400}
+  .rsvp-popup-title{margin:0 0 18px;background:var(--gold-text);-webkit-background-clip:text;background-clip:text;color:transparent;font-family:"Lora", serif !important;font-size:22px;font-weight:400}
   .rsvp-popup-name,.rsvp-popup-select{width:100%;padding:12px 14px;border:1px solid rgba(95,111,61,.3);border-radius:12px;background:#fff;color:var(--olive-dark);font:16px var(--text)}
   .rsvp-popup-name{background:var(--gold-text);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-family:"Lora", serif !important;font-size:22px;text-align:center}
-  .rsvp-popup-subtitle{margin:16px 0 7px;color:var(--olive-dark);font-family:var(--text);font-size:14px}
+  .rsvp-popup-subtitle{margin:16px 0 7px;color:var(--olive-dark);font-family:var(--text);font-size:18px}
   .rsvp-popup-actions{display:grid;gap:10px;margin-top:20px}
   .rsvp-popup-btn{padding:12px;border:1px solid #8f795e;border-radius:12px;background:#8f795e;color:#fff;cursor:pointer;font:15px var(--text)}
   .rsvp-popup-btn.secondary{background:transparent;color:var(--olive-dark)}

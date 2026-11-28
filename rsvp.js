@@ -25,6 +25,20 @@ function hideMsg(el) {
   el.textContent = "";
 }
 
+function sendRSVPToWhatsApp(invitado, nombre, respuesta, pases) {
+  const message = [
+    "Confirmación de asistencia",
+    "Primera Comunión",
+    `ID de invitado: ${invitado.id}`,
+    `Nombre: ${nombre}`,
+    `Lugares reservados: ${invitado.pases}`,
+    `Respuesta: ${respuesta === "SI" ? "Sí asistiré" : "No podré asistir"}`,
+    `Lugares: ${pases}`,
+  ].join("\n");
+  const url = `https://wa.me/50240069313?text=${encodeURIComponent(message)}`;
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
 async function apiCheck(id) {
   const url = `${RSVP_ENDPOINT}?guestId=${encodeURIComponent(id)}&t=${Date.now()}`;
   const r = await fetch(url, { cache: "no-store" });
@@ -111,7 +125,11 @@ function markConfirmedUI(message) {
   const form = $("#rsvp-form");
   const btn = $("#btnConfirmarRsvp");
   const msg = $("#msgRsvp");
+  const note = document.querySelector(".rsvp-editorial-note");
+  const copy = $("#rsvpCopy");
   if (form) form.classList.add("is-confirmed");
+  if (note) note.style.display = "none";
+  if (copy) copy.style.display = "none";
   document.querySelectorAll('#rsvp-form input, #rsvp-form select, #rsvp-form button').forEach((el) => {
     if (!el.hasAttribute("readonly")) el.disabled = true;
   });
@@ -124,7 +142,7 @@ function markConfirmedUI(message) {
   if (msg) {
     msg.style.display = "block";
     msg.className = "rsvp-msg ok";
-    msg.textContent = message || "Gracias por confirmar tu asistencia.";
+    msg.textContent = message || "Gracias por confirmar tu asistencia. Nos alegra mucho compartir este día tan especial contigo.";
   }
 }
 
@@ -132,8 +150,12 @@ function resetConfirmUI() {
   const form = $("#rsvp-form");
   const btn = $("#btnConfirmarRsvp");
   const msg = $("#msgRsvp");
+  const note = document.querySelector(".rsvp-editorial-note");
+  const copy = $("#rsvpCopy");
 
   if (form) form.classList.remove("is-confirmed");
+  if (note) note.style.display = "";
+  if (copy) copy.style.display = "";
   document.querySelectorAll('#rsvp-form input, #rsvp-form select, #rsvp-form button').forEach((el) => {
     if (!el.hasAttribute("readonly")) el.disabled = false;
   });
@@ -185,6 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function openPopup() {
+    if (form.classList.contains("is-confirmed")) return;
     const maxPasses = Math.max(1, Number(invitado?.pases || 1));
     popupCount.innerHTML = Array.from({ length: maxPasses }, (_, index) => {
       const count = index + 1;
@@ -262,6 +285,16 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    try {
+      const firebaseConfirmation = await window.RSVPDatabase?.getConfirmationByGuestId?.(getEventId(), invitado.id);
+      if (firebaseConfirmation || await apiCheck(getRemoteGuestId(invitado.id))) {
+        markConfirmedUI("Esta invitación ya tiene una respuesta registrada. Muchas gracias.");
+        return;
+      }
+    } catch (error) {
+      console.warn("No se pudo verificar la confirmación existente:", error);
+    }
+
     const selectedResponse = popupResponse || (radioYes.checked ? "SI" : $("#rsvp-response-no")?.checked ? "NO" : null);
     if (!selectedResponse) {
       showMsg(msg, "Selecciona si asistirás o no para continuar.", "error");
@@ -285,9 +318,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (res && (res.ok === true || res.success === true)) {
         await saveConfirmationToFirebase(invitado, respuesta, pasesSeleccionados);
+        sendRSVPToWhatsApp(invitado, inputNombre.value.trim() || invitado.nombre, respuesta, pasesSeleccionados);
         const okMessage = respuesta === "SI"
-          ? "Gracias por confirmar tu asistencia. Será un privilegio compartir este día contigo."
-          : "Lamentamos que no puedas acompañarnos en esta ocasión y agradecemos de corazón tu respuesta.";
+          ? "Gracias por confirmar tu asistencia. Nos alegra mucho compartir este día tan especial contigo."
+          : "Lamentamos que no puedas acompañarnos. Te tendremos presente y esperamos verte en otra ocasión.";
         markConfirmedUI(okMessage);
         return;
       }

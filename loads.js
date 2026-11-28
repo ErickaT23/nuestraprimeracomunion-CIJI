@@ -42,6 +42,31 @@ function getQueryParam(key) {
   return params.get(key);
 }
 
+function applyGuestData(guest) {
+  const name = String(guest?.name || guest?.nombre || "Invitado");
+  const passes = Math.max(1, Number(guest?.passes ?? guest?.pases ?? 1) || 1);
+  const seatsText = `${passes} ${passes === 1 ? "lugar" : "lugares"}`;
+
+  document.getElementById("guestCardName")?.replaceChildren(document.createTextNode(name));
+  document.getElementById("guestCardSeats")?.replaceChildren(document.createTextNode(String(passes)));
+  document.getElementById("guestCardSeatsTxt")?.replaceChildren(document.createTextNode(passes === 1 ? "lugar" : "lugares"));
+
+  const nameInput = document.getElementById("rsvp-name");
+  if (nameInput) nameInput.value = name;
+  const reservedSeats = document.getElementById("reservedSeats");
+  if (reservedSeats) reservedSeats.textContent = seatsText;
+
+  const popupName = document.getElementById("rsvp-popup-name");
+  if (popupName) popupName.value = name;
+  const popupCount = document.getElementById("rsvp-popup-count");
+  if (popupCount) {
+    popupCount.innerHTML = Array.from({ length: passes }, (_, index) => {
+      const count = index + 1;
+      return `<option value="${count}">${count} ${count === 1 ? "lugar" : "lugares"}</option>`;
+    }).join("");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const guestId = getQueryParam("id");
 
@@ -65,10 +90,60 @@ document.addEventListener("DOMContentLoaded", () => {
       const p = Number(guest.passes || 1);
       passesEl.textContent = `${p} ${p === 1 ? "pase" : "pases"}`;
     }
+    applyGuestData(guest);
+    syncGuestFromFirebase(guestId);
   } else {
     window.currentGuest = null;
 
     const guestNameEl = document.getElementById("guest-name");
     if (guestNameEl) guestNameEl.textContent = "Invitado no encontrado";
+    syncGuestFromFirebase(guestId);
   }
 });
+
+async function syncGuestFromFirebase(guestId) {
+  const eventId = window.config?.event?.defaultEventId || "primera-comunion-2026";
+  let lastSignature = "";
+
+  const loadGuest = async () => {
+    const database = window.RSVPDatabase;
+    if (!database?.getInvitadoById) return false;
+
+    try {
+      const guest = await database.getInvitadoById(eventId, guestId);
+      if (!guest || guest.activo === false) return true;
+
+      const nextGuest = {
+        id: String(guest.id || guestId),
+        name: String(guest.nombre || "Invitado"),
+        passes: Number(guest.pases || 1),
+      };
+      const signature = JSON.stringify(nextGuest);
+      if (signature === lastSignature) return true;
+      lastSignature = signature;
+      window.currentGuest = nextGuest;
+      applyGuestData(nextGuest);
+
+      const guestNameEl = document.getElementById("guest-name");
+      const passesEl = document.getElementById("passes");
+      if (guestNameEl) guestNameEl.textContent = nextGuest.name;
+      if (passesEl) {
+        const p = nextGuest.passes;
+        passesEl.textContent = `${p} ${p === 1 ? "pase" : "pases"}`;
+      }
+      window.dispatchEvent(new CustomEvent("guest:updated"));
+      return true;
+    } catch (error) {
+      console.warn("No se pudo sincronizar el invitado:", error);
+      return false;
+    }
+  };
+
+  let attempts = 0;
+  const waitForDatabase = setInterval(async () => {
+    attempts += 1;
+    if (await loadGuest() || attempts >= 20) clearInterval(waitForDatabase);
+  }, 250);
+
+  setInterval(loadGuest, 3000);
+}
